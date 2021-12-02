@@ -1,0 +1,3 @@
+Nombre: silla / Precio: 60
+Nombre: cama / Precio: 300
+Nombre: libreira / Precio: 150

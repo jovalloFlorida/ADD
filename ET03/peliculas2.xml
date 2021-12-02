@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Peliculas>
+    <Pelicula>
+        <Titulo>El señor de los anillos</Titulo>
+        <Director>Peter Jackson</Director>
+        <Puntuacion>9</Puntuacion>
+        <Genero>Fantasy</Genero>
+    </Pelicula>
+    <Pelicula>
+        <Titulo>Blade Runner 2049</Titulo>
+        <Director>Denis Villeneve</Director>
+        <Puntuacion>8.5</Puntuacion>
+        <Genero>Ciencia Ficcion</Genero>
+    </Pelicula>
+    <Pelicula>
+        <Titulo>Alien</Titulo>
+        <Director>Rideley Scott</Director>
+        <Puntuacion>8.3</Puntuacion>
+        <Genero>Terror</Genero>
+    </Pelicula>
+    <Pelicula>
+        <Titulo>The Matrix</Titulo>
+        <Director>Wachowski Brothers</Director>
+        <Puntuacion>9</Puntuacion>
+        <Genero>Sci-Fi and Fantasy</Genero>
+    </Pelicula>
+    <Pelicula>
+        <Titulo>a</Titulo>
+        <Director>b</Director>
+        <Puntuacion>c</Puntuacion>
+        <Genero>d</Genero>
+    </Pelicula>
+    <Pelicula>
+        <Titulo>1</Titulo>
+        <Director>2</Director>
+        <Puntuacion>3</Puntuacion>
+        <Genero>4</Genero>
+    </Pelicula>
+    <Pelicula>
+        <Titulo>aa</Titulo>
+        <Director>bb</Director>
+        <Puntuacion>cc</Puntuacion>
+        <Genero>dd</Genero>
+    </Pelicula>
+</Peliculas>

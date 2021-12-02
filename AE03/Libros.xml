@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Libros>
+    <Libro>
+        <Identificador>1</Identificador>
+        <Titulo>Saltamontes va de viaje</Titulo>
+        <Autor>Arnold Lobel</Autor>
+        <Publicacion>1992</Publicacion>
+        <Editorial>Kalandraka</Editorial>
+        <NumPaginas>68</NumPaginas>
+    </Libro>
+    <Libro>
+        <Identificador>2</Identificador>
+        <Titulo>La merienda del parque</Titulo>
+        <Autor>Pablo Albo y Cecilia Moreno</Autor>
+        <Publicacion>1984</Publicacion>
+        <Editorial>Narval editores</Editorial>
+        <NumPaginas>44</NumPaginas>
+    </Libro>
+    <Libro>
+        <Identificador>3</Identificador>
+        <Titulo>Empanada de mamut</Titulo>
+        <Autor>Jeanne Willis</Autor>
+        <Publicacion>2012</Publicacion>
+        <Editorial>Libros del Zorro Rojo</Editorial>
+        <NumPaginas>36</NumPaginas>
+    </Libro>
+    <Libro>
+        <Identificador>4</Identificador>
+        <Titulo>Olivia y la carta a los Reyes Magos</Titulo>
+        <Autor>Elvira Lindo</Autor>
+        <Publicacion>2002</Publicacion>
+        <Editorial>SM</Editorial>
+        <NumPaginas>86</NumPaginas>
+    </Libro>
+    <Libro>
+        <Identificador>5</Identificador>
+        <Titulo>Mi papus y yo</Titulo>
+        <Autor>Francesc Rovira</Autor>
+        <Publicacion>2002</Publicacion>
+        <Editorial>Penguin</Editorial>
+        <NumPaginas>96</NumPaginas>
+    </Libro>
+</Libros>
