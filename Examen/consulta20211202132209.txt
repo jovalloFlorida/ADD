@@ -1,0 +1,2 @@
+Nombre: silla / Precio: 60
+Nombre: libreira / Precio: 150
