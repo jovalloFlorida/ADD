@@ -36,7 +36,7 @@ public class Biblioteca {
 	 * @throws TransformerException
 	 */
 	public void menuPrincipal() throws ParserConfigurationException, SAXException, IOException, TransformerException {
-
+		
 		try {
 			System.out.println("\n\n");
 			System.out.println("1. Mostrar todos los títulos de la biblioteca");
@@ -55,7 +55,6 @@ public class Biblioteca {
 				break;
 			case "2":
 				mostrarLibro();
-				;
 				break;
 			case "3":
 				crearLibro();
@@ -65,7 +64,6 @@ public class Biblioteca {
 				break;
 			case "5":
 				borrarLibro();
-				;
 				break;
 			case "6":
 				System.out.println("\nSalida de la Aplicacion");
