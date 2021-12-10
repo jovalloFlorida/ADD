@@ -1,0 +1,17 @@
+<?xmlversion="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mappingPUBLIC
+    "-//Hibernate/HibernateMappingDTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mappingpackage="es.florida.AE05">
+    <class name="Cancion" table="bibliotecaadd">
+        <id name="id" column="id">
+            <generatorclass="increment"/>
+        </id>
+        <property name="titulo" type="string" column="titulo"/>
+        <property name="autor" type="string" column="autor"/>
+        <property name="nacimiento" type="int" column="nacimiento"/>
+        <property name="publicacion" type="string" column="publicacion"/>
+        <property name="editorial" type="string" column="editorial"/>
+        <property name="numpaginas" type="string" column="numpaginas"/>
+    </class>
+</hibernate-mapping>
