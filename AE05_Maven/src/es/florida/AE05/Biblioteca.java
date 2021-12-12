@@ -172,10 +172,17 @@ public class Biblioteca {
 		session.beginTransaction();
 
 		try {
-			Libro libro = new Libro();
-			libro.setId(id);
-			session.delete(libro);
-			System.out.println("\nLibro borrado con Id " + id);
+			
+			Libro libro = (Libro) session.get(Libro.class, id);
+
+			if (libro != null) { // Controlamos que exista el id en la BBDD
+				libro.setId(id);
+				session.delete(libro);
+				System.out.println("\nLibro borrado con Id " + id);
+			} else {
+				System.out.println("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			}
+			
 		} catch (Exception e) {
 			System.out.println("\nExcepcion: No se puede borrar de la Base de Datos el Libro... " + id);
 			// e.printStackTrace();
