@@ -60,8 +60,9 @@ public class Biblioteca {
 					JSONObject obj = new JSONObject(cursor.next().toJson());
 					System.out.println("\nLibro -> " + "Id: " + obj.getString("Id") + " - " + "Titulo: "
 							+ obj.getString("Titol") + " - " + "Autor: " + obj.getString("Autor") + " - "
-							+ "A�o Nacimiento: " + obj.getString("Any_naixement") + " - " + "Editorial: "
-							+ obj.getString("Editorial") + " - " + "Num. Paginas: " + obj.getString("Nombre_pagines"));
+							+ "Año Nacimiento: " + obj.getString("Any_naixement") + " - " + "Año Publicacion: "
+							+ obj.getString("Any_publicacio") + " - " + "Editorial: " + obj.getString("Editorial")
+							+ " - " + "Num. Paginas: " + obj.getString("Nombre_pagines"));
 				}
 			}
 
@@ -73,6 +74,41 @@ public class Biblioteca {
 
 	public static void crearLibro() {
 
+		try {
+			MongoCollection<Document> coleccion = mongoDBConnection();
+			Document doc = new Document();
+			Scanner teclado = new Scanner(System.in);
+
+			int idCount = (int) (coleccion.count() + 1);
+
+			doc.append("Id", String.valueOf(idCount));
+			System.out.print("\nIntroduce el Titulo: ");
+			String titulo = teclado.nextLine();
+			doc.append("Titol", titulo);
+			System.out.print("Introduce el Autor: ");
+			String autor = teclado.nextLine();
+			doc.append("Autor", autor);
+			System.out.print("Introduce el Año Nacimiento: ");
+			String aNacimiento = teclado.nextLine();
+			doc.append("Any_naixement", aNacimiento);
+			System.out.print("Introduce el Año Publicacion: ");
+			String aPublicacion = teclado.nextLine();
+			doc.append("Any_publicacio", aPublicacion);
+			System.out.print("Introduce el nombre de la Editorial: ");
+			String editorial = teclado.nextLine();
+			doc.append("Editorial", editorial);
+			System.out.print("Introduce el numero de paginas: ");
+			String numPaginas = teclado.nextLine();
+			doc.append("Nombre_pagines", numPaginas);
+			coleccion.insertOne(doc);
+			
+			System.out.println("\nCreado Libro en la Base de Datos Id: " + idCount);
+
+		} catch (Exception e) {
+			System.out.println("\nExcepcion: No existe o no se puede actualizar el Libro...");
+			// e.printStackTrace();
+		}
+
 	}
 
 	public static void actualizarLibro(int id) {
@@ -80,7 +116,19 @@ public class Biblioteca {
 	}
 
 	public static void borrarLibro(int id) {
+		try {
+			MongoCollection<Document> coleccion = mongoDBConnection();
 
+			if (id > coleccion.count()) {
+				System.err.println("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			} else {
+				coleccion.deleteOne(eq("Id", String.valueOf(id)));
+				System.out.println("\nLibro borrado con Id " + id);
+			}
+
+		} catch (Exception e) {
+			System.err.println("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+		}
 	}
 
 	public static void main(String[] args) throws InterruptedException {

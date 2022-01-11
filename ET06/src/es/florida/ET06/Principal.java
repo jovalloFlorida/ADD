@@ -80,14 +80,14 @@ public class Principal {
 			System.out.println(cursor.next().toJson());
 		}
 
-		System.out.println("\nDocumentos con año posterior a 1980: ");
+		System.out.println("\nDocumentos con aï¿½o posterior a 1980: ");
 		query = gte("anyo", 1980);
 		cursor = coleccion.find(query).iterator();
 		while (cursor.hasNext()) {
 			System.out.println(cursor.next().toJson());
 		}
 
-		System.out.println("\nTitulos con año posterior a 1980: ");
+		System.out.println("\nTitulos con aï¿½o posterior a 1980: ");
 		query = gte("anyo", 1980);
 		cursor = coleccion.find(query).iterator();
 		while (cursor.hasNext()) {
@@ -116,21 +116,21 @@ public class Principal {
 		}
 
 		// Borrar
-		System.out.println("Tamaño coleccion: " + coleccion.count());
-		System.out.println("Tamaño coleccion: " + coleccion.countDocuments());
-		System.out.println("Tamaño coleccion: " + coleccion.estimatedDocumentCount());
+		System.out.println("Tamaï¿½o coleccion: " + coleccion.count());
+		System.out.println("Tamaï¿½o coleccion: " + coleccion.countDocuments());
+		System.out.println("Tamaï¿½o coleccion: " + coleccion.estimatedDocumentCount());
 
 		System.out.println("Borrar elemento con formato OGG");
 		coleccion.deleteOne(eq("formato", "OGG"));
-		System.out.println("Tamaño coleccion: " + coleccion.count());
+		System.out.println("Tamaï¿½o coleccion: " + coleccion.count());
 
 		System.out.println("Borrar todo elemento con formato RAW");
 		coleccion.deleteMany(eq("formato", "RAW"));
-		System.out.println("Tamaño coleccion: " + coleccion.count());
+		System.out.println("Tamaï¿½o coleccion: " + coleccion.count());
 
 		System.out.println("Borrar toda la coleccion");
 		coleccion.drop();
-		System.out.println("Tamaño coleccion: " + coleccion.count());
+		System.out.println("Tamaï¿½o coleccion: " + coleccion.count());
 
 		mongoClient.close();
 
