@@ -28,23 +28,27 @@ public class Principal {
 
 		System.out.println("Conexion Correcta...\n");
 
-		/*
-		 * // Insertar un documento en la coleccion
-		 * System.out.println("Insertar un documento...\n"); Document doc = new
-		 * Document(); doc.append("titulo", arrayTitulos[0]); doc.append("artista",
-		 * arrayArtistas[0]); doc.append("anyo", arrayAnyos[0]); doc.append("formato",
-		 * arrayFormatos[0]); coleccion.insertOne(doc);
-		 */
+		// Insertar un documento en la coleccion
+		System.out.println("Insertar un documento...\n");
+		Document doc = new Document();
+		doc.append("titulo", arrayTitulos[0]);
+		doc.append("artista", arrayArtistas[0]);
+		doc.append("anyo", arrayAnyos[0]);
+		doc.append("formato", arrayFormatos[0]);
+		coleccion.insertOne(doc);
 
-		/*
-		 * // Insertar varios documento en la coleccion
-		 * System.out.println("Insertar varios documentos...\n"); ArrayList<Document>
-		 * listaDocs = new ArrayList<Document>(); for(int i=0; i > arrayTitulos.length;
-		 * i++) { doc = new Document(); doc.append("titulo", arrayTitulos[i]);
-		 * doc.append("artista", arrayArtistas[i]); doc.append("anyo", arrayAnyos[i]);
-		 * doc.append("formato", arrayFormatos[i]); listaDocs.add(doc); }
-		 * coleccion.insertMany(listaDocs);
-		 */
+		// Insertar varios documento en la coleccion
+		System.out.println("Insertar varios documentos...\n");
+		ArrayList<Document> listaDocs = new ArrayList<Document>();
+		for (int i = 0; i < arrayTitulos.length; i++) {
+			doc = new Document();
+			doc.append("titulo", arrayTitulos[i]);
+			doc.append("artista", arrayArtistas[i]);
+			doc.append("anyo", arrayAnyos[i]);
+			doc.append("formato", arrayFormatos[i]);
+			listaDocs.add(doc);
+		}
+		coleccion.insertMany(listaDocs);
 
 		// Obtener tamanyo coleccion
 		System.out.println("\n==========================");
@@ -82,7 +86,7 @@ public class Principal {
 		while (cursor.hasNext()) {
 			System.out.println(cursor.next().toJson());
 		}
-		
+
 		System.out.println("\nTitulos con año posterior a 1980: ");
 		query = gte("anyo", 1980);
 		cursor = coleccion.find(query).iterator();
@@ -100,7 +104,7 @@ public class Principal {
 			System.out.println(cursor.next().toJson());
 		}
 
-		System.out.println("\nActualizar solo 1 documento cambiando Wav a OGG");
+		System.out.println("\nActualizar solo 1 documento cambiando WAW a OGG");
 		coleccion.updateOne(eq("formato", "WAV"), new Document("$set", new Document("formato", "OGG")));
 
 		System.out.println("\n=========================");
@@ -115,19 +119,18 @@ public class Principal {
 		System.out.println("Tamaño coleccion: " + coleccion.count());
 		System.out.println("Tamaño coleccion: " + coleccion.countDocuments());
 		System.out.println("Tamaño coleccion: " + coleccion.estimatedDocumentCount());
-		
+
 		System.out.println("Borrar elemento con formato OGG");
-		coleccion.deleteOne(eq("formato","OGG"));
+		coleccion.deleteOne(eq("formato", "OGG"));
 		System.out.println("Tamaño coleccion: " + coleccion.count());
-		
+
 		System.out.println("Borrar todo elemento con formato RAW");
-		coleccion.deleteMany(eq("formato","RAW"));
+		coleccion.deleteMany(eq("formato", "RAW"));
 		System.out.println("Tamaño coleccion: " + coleccion.count());
-		
-		//System.out.println("Borrar toda la coleccion");
-		//coleccion.drop();
-		//System.out.println("Tamaño coleccion: " + coleccion.count());
-		
+
+		System.out.println("Borrar toda la coleccion");
+		coleccion.drop();
+		System.out.println("Tamaño coleccion: " + coleccion.count());
 
 		mongoClient.close();
 
