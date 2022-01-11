@@ -101,7 +101,7 @@ public class Biblioteca {
 			String numPaginas = teclado.nextLine();
 			doc.append("Nombre_pagines", numPaginas);
 			coleccion.insertOne(doc);
-			
+
 			System.out.println("\nCreado Libro en la Base de Datos Id: " + idCount);
 
 		} catch (Exception e) {
@@ -112,6 +112,64 @@ public class Biblioteca {
 	}
 
 	public static void actualizarLibro(int id) {
+
+		try {
+			MongoCollection<Document> coleccion = mongoDBConnection();
+			MongoCursor<Document> cursor = coleccion.find().iterator();
+
+			Bson query = eq("Id", String.valueOf(id));
+			cursor = coleccion.find(query).iterator();
+
+
+			if (id > coleccion.count()) {
+				System.err.println("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			} else {
+
+				JSONObject obj = new JSONObject(cursor.next().toJson());
+				Document doc = new Document();
+				Scanner teclado = new Scanner(System.in);
+
+				int idCount = (int) (coleccion.count() + 1);
+
+				//doc.append("Id", String.valueOf(idCount));
+				coleccion.updateOne(eq("Id", obj.getString("Id")), new Document("$set", new Document("Id", obj.getString("Id"))));
+				
+				System.out.print("\nIntroduce el Titulo: ");
+				String titulo = teclado.nextLine();
+				//doc.append("Titol", titulo);
+				coleccion.updateOne(eq("Titol", obj.getString("Titol")), new Document("$set", new Document("Titol", titulo)));
+				
+				System.out.print("Introduce el Autor: ");
+				String autor = teclado.nextLine();
+				//doc.append("Autor", autor);
+				coleccion.updateOne(eq("Autor", obj.getString("Autor")), new Document("$set", new Document("Autor", autor)));
+				
+				System.out.print("Introduce el Año Nacimiento: ");
+				String aNacimiento = teclado.nextLine();
+				//doc.append("Any_naixement", aNacimiento);
+				coleccion.updateOne(eq("Any_naixement", obj.getString("Any_naixement")), new Document("$set", new Document("Any_naixement", aNacimiento)));
+				
+				System.out.print("Introduce el Año Publicacion: ");
+				String aPublicacion = teclado.nextLine();
+				//doc.append("Any_publicacio", aPublicacion);
+				coleccion.updateOne(eq("Any_publicacio", obj.getString("Any_publicacio")), new Document("$set", new Document("Any_publicacio", aPublicacion)));
+				
+				System.out.print("Introduce el nombre de la Editorial: ");
+				String editorial = teclado.nextLine();
+				//doc.append("Editorial", editorial);
+				coleccion.updateOne(eq("Editorial", obj.getString("Editorial")), new Document("$set", new Document("Editorial", editorial)));
+				
+				System.out.print("Introduce el numero de paginas: ");
+				String numPaginas = teclado.nextLine();
+				//doc.append("Nombre_pagines", numPaginas);
+				coleccion.updateOne(eq("Nombre_pagines", obj.getString("Nombre_pagines")), new Document("$set", new Document("Nombre_pagines", numPaginas)));
+				
+				System.out.println("\nLibro actualizado...");
+
+			}
+		} catch (Exception e) {
+			System.err.println("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+		}
 
 	}
 
