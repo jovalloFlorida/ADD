@@ -1,5 +1,6 @@
 package es.add.ae5;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +24,7 @@ public class Controlador {
 		this.vista = vista;
 		initEventHandlers();
 		control(session);
-		vista.gettextArea_Texto().append("Leer es bueno. ¿En qué te podemos ayudar?");
+		//vista.gettextArea_Texto().append("Leer es bueno. ¿En qué te podemos ayudar?");
 	}
 
 
@@ -36,7 +37,7 @@ public class Controlador {
 		actionListenerMostrar = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				linea = Biblioteca.mostrarBD(session);
-				vista.gettextArea_Texto().append("\n" + "\nMostrando base de datos completa:");
+				vista.gettextArea_Texto().append("\n" + " <<< Listado base de datos completa >>>\n");
 				vista.gettextArea_Texto().append("\n" + linea);
 			}
 		};
