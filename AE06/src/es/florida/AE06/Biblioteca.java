@@ -1,3 +1,6 @@
+/**
+ * Desarrollar un proyecto Java que gestione objetos libro como documentos y asegure su persistencia como una colección en la base de datos MongoDB.
+ */
 package es.florida.AE06;
 
 import org.bson.Document;
@@ -17,6 +20,12 @@ import java.util.logging.Level;
 
 public class Biblioteca {
 
+	/**
+	 * Metodo para la Carga de la configuracion de conexion con la base de datos
+	 * mediante el numero de puerto a la base de datos MongoDB
+	 * 
+	 * @return
+	 */
 	public static MongoCollection<Document> mongoDBConnection() {
 		MongoClient mongoClient = new MongoClient("localhost", 27017);
 		MongoDatabase database = mongoClient.getDatabase("Biblioteca");
@@ -24,11 +33,18 @@ public class Biblioteca {
 		return coleccion;
 	}
 
+	/**
+	 * Metodo para el cierre cierre de la conexion con la base de datos MongoDB
+	 */
 	public static void mongoDBConnectionClose() {
 		MongoClient mongoClient = new MongoClient("localhost", 27017);
 		mongoClient.close();
 	}
 
+	/**
+	 * Metodo para mostrar por pantalla todos los libros de la base de Datos,
+	 * mostrando solo el Id y el Titulo del libro.
+	 */
 	public static void mostrarTodos() {
 
 		MongoCollection<Document> coleccion = mongoDBConnection();
@@ -41,6 +57,11 @@ public class Biblioteca {
 		}
 	}
 
+	/**
+	 * Metodo que enviandole el id muestre la informacion detallada del libro
+	 * 
+	 * @param id
+	 */
 	public static void mostrarLibro(int id) {
 
 		try {
@@ -67,6 +88,9 @@ public class Biblioteca {
 		}
 	}
 
+	/**
+	 * Metodo para la creacion de un nuevo Libro en la Base de Datos
+	 */
 	public static void crearLibro() {
 
 		try {
@@ -80,27 +104,27 @@ public class Biblioteca {
 			System.out.print("\nIntroduce el Titulo: ");
 			String titulo = teclado.nextLine();
 			doc.append("Titol", titulo);
-			
+
 			System.out.print("Introduce el Autor: ");
 			String autor = teclado.nextLine();
 			doc.append("Autor", autor);
-			
+
 			System.out.print("Introduce el Año Nacimiento: ");
 			String aNacimiento = teclado.nextLine();
 			doc.append("Any_naixement", aNacimiento);
-			
+
 			System.out.print("Introduce el Año Publicacion: ");
 			String aPublicacion = teclado.nextLine();
 			doc.append("Any_publicacio", aPublicacion);
-			
+
 			System.out.print("Introduce el nombre de la Editorial: ");
 			String editorial = teclado.nextLine();
 			doc.append("Editorial", editorial);
-			
+
 			System.out.print("Introduce el numero de paginas: ");
 			String numPaginas = teclado.nextLine();
 			doc.append("Nombre_pagines", numPaginas);
-			
+
 			coleccion.insertOne(doc);
 			System.out.println("\nCreado Libro en la Base de Datos Id: " + idCount);
 
@@ -110,6 +134,11 @@ public class Biblioteca {
 
 	}
 
+	/**
+	 * Metodo que tras pasarle el id, modificar los atributos de un Libro
+	 * 
+	 * @param id
+	 */
 	public static void actualizarLibro(int id) {
 
 		try {
@@ -126,32 +155,39 @@ public class Biblioteca {
 				JSONObject obj = new JSONObject(cursor.next().toJson());
 				Scanner teclado = new Scanner(System.in);
 
-				coleccion.updateOne(eq("Id", obj.getString("Id")), new Document("$set", new Document("Id", obj.getString("Id"))));
-				
+				coleccion.updateOne(eq("Id", obj.getString("Id")),
+						new Document("$set", new Document("Id", obj.getString("Id"))));
+
 				System.out.print("\nIntroduce el Titulo: ");
 				String titulo = teclado.nextLine();
-				coleccion.updateOne(eq("Titol", obj.getString("Titol")), new Document("$set", new Document("Titol", titulo)));
-				
+				coleccion.updateOne(eq("Titol", obj.getString("Titol")),
+						new Document("$set", new Document("Titol", titulo)));
+
 				System.out.print("Introduce el Autor: ");
 				String autor = teclado.nextLine();
-				coleccion.updateOne(eq("Autor", obj.getString("Autor")), new Document("$set", new Document("Autor", autor)));
-				
+				coleccion.updateOne(eq("Autor", obj.getString("Autor")),
+						new Document("$set", new Document("Autor", autor)));
+
 				System.out.print("Introduce el Año Nacimiento: ");
 				String aNacimiento = teclado.nextLine();
-				coleccion.updateOne(eq("Any_naixement", obj.getString("Any_naixement")), new Document("$set", new Document("Any_naixement", aNacimiento)));
-				
+				coleccion.updateOne(eq("Any_naixement", obj.getString("Any_naixement")),
+						new Document("$set", new Document("Any_naixement", aNacimiento)));
+
 				System.out.print("Introduce el Año Publicacion: ");
 				String aPublicacion = teclado.nextLine();
-				coleccion.updateOne(eq("Any_publicacio", obj.getString("Any_publicacio")), new Document("$set", new Document("Any_publicacio", aPublicacion)));
-				
+				coleccion.updateOne(eq("Any_publicacio", obj.getString("Any_publicacio")),
+						new Document("$set", new Document("Any_publicacio", aPublicacion)));
+
 				System.out.print("Introduce el nombre de la Editorial: ");
 				String editorial = teclado.nextLine();
-				coleccion.updateOne(eq("Editorial", obj.getString("Editorial")), new Document("$set", new Document("Editorial", editorial)));
-				
+				coleccion.updateOne(eq("Editorial", obj.getString("Editorial")),
+						new Document("$set", new Document("Editorial", editorial)));
+
 				System.out.print("Introduce el numero de paginas: ");
 				String numPaginas = teclado.nextLine();
-				coleccion.updateOne(eq("Nombre_pagines", obj.getString("Nombre_pagines")), new Document("$set", new Document("Nombre_pagines", numPaginas)));
-				
+				coleccion.updateOne(eq("Nombre_pagines", obj.getString("Nombre_pagines")),
+						new Document("$set", new Document("Nombre_pagines", numPaginas)));
+
 				System.out.println("\nLibro Actualizado...");
 
 			}
@@ -161,6 +197,11 @@ public class Biblioteca {
 
 	}
 
+	/**
+	 * Metodo a partir del id introducido, borrar el Libro de la Base de Datos
+	 * 
+	 * @param id
+	 */
 	public static void borrarLibro(int id) {
 		try {
 			MongoCollection<Document> coleccion = mongoDBConnection();
@@ -177,6 +218,11 @@ public class Biblioteca {
 		}
 	}
 
+	/**
+	 * Metodo main en el que muetra un menu con las funcionalidades de la aplicacion
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) throws InterruptedException {
 
 		Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
