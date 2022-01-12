@@ -12,12 +12,12 @@ import java.awt.Font;
 public class Vista {
 
 	private JFrame frame;
+	private JButton btnMostrarBiblioteca;
 	private JButton btnMostrar;
-	private JButton btnConsultar;
-	private JButton btnAnyadir;
-	private JButton btnModificar;
+	private JButton btnCrear;
+	private JButton btnActualizar;
 	private JButton btnBorrar;
-	private JButton btnGuardar;
+	private JButton btnSalir;
 	private JTextField textField_Mostrar;
 	private JTextArea textArea_Texto;
 
@@ -26,7 +26,6 @@ public class Vista {
 		inicialize();
 	}
 
-	
 	public void inicialize() {
 		frame = new JFrame();
 		frame.setBounds(300, 300, 950, 425);
@@ -34,7 +33,7 @@ public class Vista {
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
-		frame.setTitle("Biblioteca Pública AE05");
+		frame.setTitle("Gestion Biblioteca. AE06 MongoDB");
 
 		JScrollPane scrollPane_Original = new JScrollPane();
 		scrollPane_Original.setBounds(10, 10, 920, 230);
@@ -48,54 +47,54 @@ public class Vista {
 		scrollPane_Original.getViewport().setView(textArea_Texto);
 
 		
-		btnMostrar = new JButton("Mostrar BD");
-		btnMostrar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnMostrar.setBounds(20, 250, 120, 27);
-		frame.getContentPane().add(btnMostrar);
+		btnMostrarBiblioteca = new JButton("Mostrar Biblioteca");
+		btnMostrarBiblioteca.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnMostrarBiblioteca.setBounds(20, 250, 120, 27);
+		frame.getContentPane().add(btnMostrarBiblioteca);
 
-		btnConsultar = new JButton("Consultar libro");
-		btnConsultar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnConsultar.setBounds(20, 324, 120, 27);
-		frame.getContentPane().add(btnConsultar);
+		btnMostrar = new JButton("Mostrar Libro");
+		btnMostrar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnMostrar.setBounds(20, 287, 120, 27);
+		frame.getContentPane().add(btnMostrar);
 		
-		btnAnyadir = new JButton("Añadir libro");
-		btnAnyadir.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnAnyadir.setBounds(20, 287, 120, 27);
-		frame.getContentPane().add(btnAnyadir);
+		btnCrear = new JButton("Crear Libro");
+		btnCrear.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCrear.setBounds(20, 324, 120, 27);
+		frame.getContentPane().add(btnCrear);
 		
-		btnModificar = new JButton("Modificar libro");
-		btnModificar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnModificar.setBounds(160, 287, 120, 27);
-		frame.getContentPane().add(btnModificar);
+		btnActualizar = new JButton("Actualizar Libro");
+		btnActualizar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnActualizar.setBounds(160, 287, 120, 27);
+		frame.getContentPane().add(btnActualizar);
 		
 		btnBorrar = new JButton("Borrar libro");
 		btnBorrar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnBorrar.setBounds(160, 324, 120, 27);
 		frame.getContentPane().add(btnBorrar);
 		
-		btnGuardar = new JButton("Salir");
-		btnGuardar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnGuardar.setBounds(779, 339, 120, 27);
-		frame.getContentPane().add(btnGuardar);
+		btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnSalir.setBounds(779, 339, 120, 27);
+		frame.getContentPane().add(btnSalir);
 
 		this.frame.setVisible(true);
 	}
 
 	
 	public JButton getbtnMostrar() {
-		return btnMostrar;
+		return btnMostrarBiblioteca;
 	}
 
 	public JButton getbtnConsultar() {
-		return btnConsultar;
+		return btnMostrar;
 	}
 
 	public JButton getbtnAnyadir() {
-		return btnAnyadir;
+		return btnCrear;
 	}
 	
 	public JButton getbtnModificar() {
-		return btnModificar;
+		return btnActualizar;
 	}
 	
 	public JButton getbtnBorrar() {
@@ -103,7 +102,7 @@ public class Vista {
 	}
 	
 	public JButton getbtnGuardar() {
-		return btnGuardar;
+		return btnSalir;
 	}
 
 	public JTextField gettextField_Mostrar() {
