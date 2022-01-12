@@ -201,7 +201,7 @@ public class Biblioteca {
 					mostrarTodos();
 					break;
 				case 2:
-					System.out.print(">>>> Indica el numero del Libro a mostrar: ");
+					System.out.print(">>> Indica el numero del Libro a mostrar: ");
 					id = Integer.parseInt(teclado.next());
 					mostrarLibro(id);
 					break;
@@ -229,8 +229,8 @@ public class Biblioteca {
 			}
 
 		} catch (Exception e) {
-			System.out.println("\n <<< Excepcion: Opcion no Admitida >>>");
-			// e.printStackTrace();
+			System.err.println("\n <<< Excepcion: Opcion no Admitida >>>");
+			main(args);
 		}
 
 	}
