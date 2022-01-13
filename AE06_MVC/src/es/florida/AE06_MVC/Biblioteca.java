@@ -52,7 +52,7 @@ public class Biblioteca {
 		MongoCollection<Document> coleccion = mongoDBConnection();
 		MongoCursor<Document> cursor = coleccion.find().iterator();
 
-		linea=("\n <<< Listado de la Biblioteca >>>\n");
+		linea = ("\n <<< Listado de la Biblioteca >>>\n");
 		while (cursor.hasNext()) {
 			JSONObject obj = new JSONObject(cursor.next().toJson());
 			linea += (obj.getString("Id") + " - " + obj.getString("Titol") + "\n");
@@ -82,15 +82,15 @@ public class Biblioteca {
 			} else {
 				while (cursor.hasNext()) {
 					JSONObject obj = new JSONObject(cursor.next().toJson());
-					linea += ("\nLibro -> " + "Id: " + obj.getString("Id") + " - " + "Titulo: " + obj.getString("Titol")
-							+ " - " + "Autor: " + obj.getString("Autor") + " - " + "Año Nacimiento: "
-							+ obj.getString("Any_naixement") + " - " + "Año Publicacion: "
-							+ obj.getString("Any_publicacio") + " - " + "Editorial: " + obj.getString("Editorial")
-							+ " - " + "Num. Paginas: " + obj.getString("Nombre_pagines"));
+					linea += ("\nLibro -> " + "Id: " + obj.getString("Id") + "\nTitulo: " + obj.getString("Titol")
+							+ "\nAutor: " + obj.getString("Autor") + "\nAño Nacimiento: "
+							+ obj.getString("Any_naixement") + "\nAño Publicacion: " + obj.getString("Any_publicacio")
+							+ "\nEditorial: " + obj.getString("Editorial") + "\nNum. Paginas: "
+							+ obj.getString("Nombre_pagines") + "\n");
 				}
 			}
 		} catch (Exception e) {
-			linea=("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
 		}
 
 		return linea;

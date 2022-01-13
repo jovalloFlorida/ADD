@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.ScrollPaneConstants;
 
 public class Vista {
 
@@ -28,7 +29,7 @@ public class Vista {
 
 	public void inicialize() {
 		frame = new JFrame();
-		frame.setBounds(300, 300, 891, 499);
+		frame.setBounds(300, 300, 743, 499);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
@@ -36,7 +37,7 @@ public class Vista {
 		frame.setTitle("Gestion Biblioteca. AE06 MongoDB");
 
 		JScrollPane scrollPane_Original = new JScrollPane();
-		scrollPane_Original.setBounds(10, 10, 688, 426);
+		scrollPane_Original.setBounds(10, 10, 521, 426);
 		frame.getContentPane().add(scrollPane_Original);
 
 		textArea_Texto = new JTextArea();
@@ -49,32 +50,32 @@ public class Vista {
 		
 		btnMostrarBiblioteca = new JButton("Mostrar Biblioteca");
 		btnMostrarBiblioteca.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnMostrarBiblioteca.setBounds(720, 65, 130, 28);
+		btnMostrarBiblioteca.setBounds(563, 60, 130, 28);
 		frame.getContentPane().add(btnMostrarBiblioteca);
 
 		btnMostrar = new JButton("Mostrar Libro");
 		btnMostrar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnMostrar.setBounds(720, 102, 130, 28);
+		btnMostrar.setBounds(563, 97, 130, 28);
 		frame.getContentPane().add(btnMostrar);
 		
 		btnCrear = new JButton("Crear Libro");
 		btnCrear.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnCrear.setBounds(720, 139, 130, 28);
+		btnCrear.setBounds(563, 134, 130, 28);
 		frame.getContentPane().add(btnCrear);
 		
 		btnActualizar = new JButton("Actualizar Libro");
 		btnActualizar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnActualizar.setBounds(720, 176, 130, 28);
+		btnActualizar.setBounds(563, 171, 130, 28);
 		frame.getContentPane().add(btnActualizar);
 		
 		btnBorrar = new JButton("Borrar libro");
 		btnBorrar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnBorrar.setBounds(720, 213, 130, 28);
+		btnBorrar.setBounds(563, 208, 130, 28);
 		frame.getContentPane().add(btnBorrar);
 		
 		btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnSalir.setBounds(730, 395, 120, 27);
+		btnSalir.setBounds(563, 390, 130, 28);
 		frame.getContentPane().add(btnSalir);
 
 		this.frame.setVisible(true);
