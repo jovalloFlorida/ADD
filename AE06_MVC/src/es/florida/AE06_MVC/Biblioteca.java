@@ -77,19 +77,19 @@ public class Biblioteca {
 			cursor = coleccion.find(query).iterator();
 
 			if (id > coleccion.count()) {
-				linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+				linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id + "\n");
 			} else {
 				while (cursor.hasNext()) {
 					JSONObject obj = new JSONObject(cursor.next().toJson());
-					linea += ("\nLibro -> " + "Id: " + obj.getString("Id") + "Titulo: " + obj.getString("Titol")
-							+ "Autor: " + obj.getString("Autor") + "Año Nacimiento: "
-							+ obj.getString("Any_naixement") + "Año Publicacion: " + obj.getString("Any_publicacio")
-							+ "Editorial: " + obj.getString("Editorial") + "Num. Paginas: "
+					linea += ("\nLibro -> " + "Id: " + obj.getString("Id") + "\nTitulo: " + obj.getString("Titol")
+							+ "\nAutor: " + obj.getString("Autor") + "\nAño Nacimiento: "
+							+ obj.getString("Any_naixement") + "\nAño Publicacion: " + obj.getString("Any_publicacio")
+							+ "\nEditorial: " + obj.getString("Editorial") + "\nNum. Paginas: "
 							+ obj.getString("Nombre_pagines") + "\n");
 				}
 			}
 		} catch (Exception e) {
-			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id + "\n");
 		}
 
 		return linea;
@@ -120,7 +120,7 @@ public class Biblioteca {
 			linea = ("\nCreado Libro en la Base de Datos Id: " + idCount);
 
 		} catch (Exception e) {
-			linea = ("\nExcepcion: No existe o no se puede actualizar el Libro...");
+			linea = ("\nExcepcion: No existe o no se puede actualizar el Libro...\n");
 		}
 
 		return linea;
@@ -145,7 +145,7 @@ public class Biblioteca {
 			cursor = coleccion.find(query).iterator();
 
 			if (id > coleccion.count()) {
-				linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+				linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id + "\n");
 			} else {
 
 				JSONObject obj = new JSONObject(cursor.next().toJson());
@@ -169,7 +169,7 @@ public class Biblioteca {
 
 			}
 		} catch (Exception e) {
-			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id + "\n");
 		}
 
 		return linea;
@@ -189,14 +189,14 @@ public class Biblioteca {
 			MongoCollection<Document> coleccion = mongoDBConnection();
 
 			if (id > coleccion.count()) {
-				linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+				linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id + "\n");
 			} else {
 				coleccion.deleteOne(eq("Id", String.valueOf(id)));
 				linea = ("\n <<< Libro borrado con Id " + id + " >>>");
 			}
 
 		} catch (Exception e) {
-			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id);
+			linea = ("\nNo hay ningun libro en la Base de Datos con el id: " + id + "\n");
 		}
 
 		return linea;
