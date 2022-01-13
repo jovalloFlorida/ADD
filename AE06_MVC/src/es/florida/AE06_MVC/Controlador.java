@@ -2,72 +2,76 @@ package es.florida.AE06_MVC;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import org.bson.Document;
-
 import com.mongodb.client.MongoCollection;
 
 public class Controlador {
 
 	private Vista vista;
-	private ActionListener actionListenerMostrar, actionListenerConsultaLibro, actionListenerAnyadir,
-			actionListenerModificar, actionListenerBorrar, actionListenerGuardar;
+	private ActionListener actionListenerMostrarTodos, actionListenerMostrarLibro, actionListenercrearLibro,
+			actionListenerModificar, actionListenerBorrarLibro, actionListenerSalir;
 	String linea;
 
-	// Método: controlador
-	// Descripción: carga la interfaz e instancia los métodos initEventHandlers() y
-	// control()
-	// Parámetros de entrada: no.
-	// Parámetros de salida: no.
+	/**
+	 * Metodo Controlador que carga la interfaz e instancia los métodos
+	 * initEventHandlers() y control()
+	 * 
+	 * @param vista
+	 * @param biblioteca
+	 * @param coleccion
+	 */
 	public Controlador(Vista vista, Biblioteca biblioteca, MongoCollection<Document> coleccion) {
 		this.vista = vista;
 		initEventHandlers();
 		control();
 	}
 
-	// Método: control.
-	// Descripción: desarrolla actionListeners
-	// Parámetros de entrada: no.
-	// Parámetros de salida: no.
+	/**
+	 * Metodo Control que desarrolla actionListeners
+	 */
 	public void control() {
 
 		/**
 		 * Biblioteca.mostrarTodos()
 		 */
-		actionListenerMostrar = new ActionListener() {
+		actionListenerMostrarTodos = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				linea = Biblioteca.mostrarTodos();
-				vista.gettextArea_Texto().append("\n <<< Listado base de datos completa >>>\n");
+				vista.gettextArea_Texto().append("\n <<< Listado base de datos mostrando Id y Titulo del Libro >>>\n");
 				vista.gettextArea_Texto().append("\n" + linea);
 			}
 		};
-		vista.getbtnMostrar().addActionListener(actionListenerMostrar);
+		vista.getbtnMostrar().addActionListener(actionListenerMostrarTodos);
 
 		/**
 		 * Biblioteca.mostrarLibro(identificador);
 		 */
-		actionListenerConsultaLibro = new ActionListener() {
+		actionListenerMostrarLibro = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame jFrame = new JFrame();
-				String id = JOptionPane.showInputDialog(jFrame, "Indica el numero Id del Libro a mostrar: ");
-				int identificador = Integer.parseInt(id);
-				if (id != null) {
-					linea = Biblioteca.mostrarLibro(identificador);
-					vista.gettextArea_Texto().append("\n <<< Libro en la Base de Datos >>>\n");
-					vista.gettextArea_Texto().append("\n" + linea);
+				try {
+					JFrame jFrame = new JFrame();
+					String id = JOptionPane.showInputDialog(jFrame, "Indica el numero Id del Libro a mostrar: ");
+					int identificador = Integer.parseInt(id);
+					if (id != null) {
+						linea = Biblioteca.mostrarLibro(identificador);
+						vista.gettextArea_Texto().append("\n <<< Libro en la Base de Datos >>>\n");
+						vista.gettextArea_Texto().append("\n" + linea);
+					}
+				} catch (Exception e) {
+					vista.gettextArea_Texto()
+							.append("\n <<< Debes introducir el Id del Libro para poderlo mostrar... >>>\n");
 				}
 			}
 		};
-		vista.getbtnConsultar().addActionListener(actionListenerConsultaLibro);
+		vista.getbtnConsultar().addActionListener(actionListenerMostrarLibro);
 
 		/**
 		 * Biblioteca.crearLibro(titulo, autor, aNacimiento, aPublicacion, editorial,
 		 * numPaginas);
 		 */
-		actionListenerAnyadir = new ActionListener() {
+		actionListenercrearLibro = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				JFrame jFrame = new JFrame();
 				String titulo = JOptionPane.showInputDialog(jFrame, "Introduce el Titulo: ");
@@ -80,45 +84,56 @@ public class Controlador {
 				vista.gettextArea_Texto().append("\n" + linea);
 			}
 		};
-		vista.getbtnAnyadir().addActionListener(actionListenerAnyadir);
+		vista.getbtnAnyadir().addActionListener(actionListenercrearLibro);
 
 		/**
 		 * Biblioteca.borrarLibro(identificador)
 		 */
-		actionListenerBorrar = new ActionListener() {
+		actionListenerBorrarLibro = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame jFrame = new JFrame();
-				String id = JOptionPane.showInputDialog(jFrame, "Indica el numero Id del Libro a borrar: ");
+				try {
+					JFrame jFrame = new JFrame();
+					String id = JOptionPane.showInputDialog(jFrame, "Indica el numero Id del Libro a borrar: ");
 
-				if (id != null) {
-					int identificador = Integer.parseInt(id);
-					linea = Biblioteca.borrarLibro(identificador);
-					vista.gettextArea_Texto().append("\n" + linea);
+					if (id != null) {
+						int identificador = Integer.parseInt(id);
+						linea = Biblioteca.borrarLibro(identificador);
+						vista.gettextArea_Texto().append("\n" + linea);
+					}
+				} catch (Exception e) {
+					vista.gettextArea_Texto()
+							.append("\n <<< Debes introducir el Id del Libro para poderlo mostrar... >>>\n");
 				}
 			}
 		};
 
-		vista.getbtnBorrar().addActionListener(actionListenerBorrar);
+		vista.getbtnBorrar().addActionListener(actionListenerBorrarLibro);
 
 		/**
-		 * 
+		 * Biblioteca.actualizarLibro(identificador, titulo, autor, aNacimiento,
+		 * aPublicacion,editorial, numPaginas)
 		 */
 		actionListenerModificar = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame jFrame = new JFrame();
-				String id = JOptionPane.showInputDialog(jFrame, "Indica el numero Id del Libro a actualizar:");
-				String titulo = JOptionPane.showInputDialog(jFrame, "Introduce el Titulo: ");
-				String autor = JOptionPane.showInputDialog(jFrame, "Introduce el Autor: ");
-				String aNacimiento = JOptionPane.showInputDialog(jFrame, "Introduce la Fecha de Nacimiento: ");
-				String aPublicacion = JOptionPane.showInputDialog(jFrame, "Introduce la Fecha de Publicación: ");
-				String editorial = JOptionPane.showInputDialog(jFrame, "Introduce la Editorial: ");
-				String numPaginas = JOptionPane.showInputDialog(jFrame, "Introduce Numero Paginas: ");
+				try {
+					JFrame jFrame = new JFrame();
+					String id = JOptionPane.showInputDialog(jFrame, "Indica el numero Id del Libro a actualizar:");
+					String titulo = JOptionPane.showInputDialog(jFrame, "Introduce el Titulo: ");
+					String autor = JOptionPane.showInputDialog(jFrame, "Introduce el Autor: ");
+					String aNacimiento = JOptionPane.showInputDialog(jFrame, "Introduce la Fecha de Nacimiento: ");
+					String aPublicacion = JOptionPane.showInputDialog(jFrame, "Introduce la Fecha de Publicación: ");
+					String editorial = JOptionPane.showInputDialog(jFrame, "Introduce la Editorial: ");
+					String numPaginas = JOptionPane.showInputDialog(jFrame, "Introduce Numero Paginas: ");
 
-				int identificador = Integer.parseInt(id);
+					int identificador = Integer.parseInt(id);
 
-				linea = Biblioteca.actualizarLibro(identificador, titulo, autor, aNacimiento, aPublicacion, editorial,
-						numPaginas);
-				vista.gettextArea_Texto().append("\n" + linea);
+					linea = Biblioteca.actualizarLibro(identificador, titulo, autor, aNacimiento, aPublicacion,
+							editorial, numPaginas);
+					vista.gettextArea_Texto().append("\n" + linea);
+				} catch (Exception e) {
+					vista.gettextArea_Texto()
+							.append("\n <<< Debes introducir el Id del Libro para poderlo mostrar... >>>\n");
+				}
 			}
 		};
 		vista.getbtnModificar().addActionListener(actionListenerModificar);
@@ -126,20 +141,19 @@ public class Controlador {
 		/**
 		 * Boton de Salida de Aplicacion
 		 */
-		actionListenerGuardar = new ActionListener() {
+		actionListenerSalir = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				Biblioteca.mongoDBConnectionClose();
 				System.exit(0);
 			}
 		};
-		vista.getbtnGuardar().addActionListener(actionListenerGuardar);
+		vista.getbtnGuardar().addActionListener(actionListenerSalir);
 
 	}
 
-	// Método: initEventHandlers.
-	// Descripción: Controlador de eventos.
-	// Parámetros de entrada: no.
-	// Parámetros de salida: no.
+	/**
+	 * Metodo initEventHandlers(), Controlador de eventos.
+	 */
 	public void initEventHandlers() {
 
 		vista.getbtnMostrar().addActionListener((ActionListener) new ActionListener() {

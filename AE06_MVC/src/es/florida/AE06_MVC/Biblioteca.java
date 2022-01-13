@@ -52,7 +52,6 @@ public class Biblioteca {
 		MongoCollection<Document> coleccion = mongoDBConnection();
 		MongoCursor<Document> cursor = coleccion.find().iterator();
 
-		linea = ("\n <<< Listado de la Biblioteca >>>\n");
 		while (cursor.hasNext()) {
 			JSONObject obj = new JSONObject(cursor.next().toJson());
 			linea += (obj.getString("Id") + " - " + obj.getString("Titol") + "\n");
@@ -82,10 +81,10 @@ public class Biblioteca {
 			} else {
 				while (cursor.hasNext()) {
 					JSONObject obj = new JSONObject(cursor.next().toJson());
-					linea += ("\nLibro -> " + "Id: " + obj.getString("Id") + "\nTitulo: " + obj.getString("Titol")
-							+ "\nAutor: " + obj.getString("Autor") + "\nAño Nacimiento: "
-							+ obj.getString("Any_naixement") + "\nAño Publicacion: " + obj.getString("Any_publicacio")
-							+ "\nEditorial: " + obj.getString("Editorial") + "\nNum. Paginas: "
+					linea += ("\nLibro -> " + "Id: " + obj.getString("Id") + "Titulo: " + obj.getString("Titol")
+							+ "Autor: " + obj.getString("Autor") + "Año Nacimiento: "
+							+ obj.getString("Any_naixement") + "Año Publicacion: " + obj.getString("Any_publicacio")
+							+ "Editorial: " + obj.getString("Editorial") + "Num. Paginas: "
 							+ obj.getString("Nombre_pagines") + "\n");
 				}
 			}
@@ -202,44 +201,5 @@ public class Biblioteca {
 
 		return linea;
 	}
-
-	/**
-	 * Metodo main en el que muetra un menu con las funcionalidades de la aplicacion
-	 * 
-	 * @param args
-	 */
-	/*
-	 * public static void main(String[] args) throws InterruptedException {
-	 * 
-	 * Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
-	 * mongoLogger.setLevel(Level.SEVERE);
-	 * 
-	 * Scanner teclado = new Scanner(System.in); int opcion = 0; int id; try { while
-	 * (opcion != 6) {
-	 * System.out.println("\n\n1. Mostrar todos los titulos de la Biblioteca");
-	 * System.out.println("2. Mostrar informacion detallada de un Libro");
-	 * System.out.println("3. Crear nuevo Libro");
-	 * System.out.println("4. Actualizar Libro");
-	 * System.out.println("5. Borrar Libro");
-	 * System.out.println("6. Cerrar la Biblioteca");
-	 * System.out.print("\n >>> Elegir una opcion: "); opcion =
-	 * Integer.parseInt(teclado.next());
-	 * 
-	 * switch (opcion) { case 1: mostrarTodos(); break; case 2:
-	 * System.out.print(">>> Indica el numero del Libro a mostrar: "); id =
-	 * Integer.parseInt(teclado.next()); mostrarLibro(id); break; case 3:
-	 * crearLibro(); break; case 4:
-	 * System.out.print(">>> Indica el numero del Libro a actualizar: "); id =
-	 * Integer.parseInt(teclado.next()); actualizarLibro(id); break; case 5:
-	 * System.out.print(">>> Indica el numero del Libro a borrar: "); id =
-	 * Integer.parseInt(teclado.next()); borrarLibro(id); break; case 6:
-	 * System.out.println("\nSalida de la Aplicacion..."); teclado.close();
-	 * mongoDBConnectionClose(); break; default: break; } }
-	 * 
-	 * } catch (Exception e) {
-	 * System.err.println("\n <<< Excepcion: Opcion no Admitida >>>"); main(args); }
-	 * 
-	 * }
-	 */
 
 }

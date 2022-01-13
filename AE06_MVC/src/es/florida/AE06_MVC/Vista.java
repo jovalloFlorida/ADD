@@ -8,7 +8,6 @@ import javax.swing.JButton;
 
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.ScrollPaneConstants;
 
 public class Vista {
 
@@ -29,10 +28,10 @@ public class Vista {
 
 	public void inicialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(300, 300, 743, 499);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setResizable(false);
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
 		frame.setTitle("Gestion Biblioteca. AE06 MongoDB");
 
