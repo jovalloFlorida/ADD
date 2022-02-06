@@ -1,0 +1,42 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.logo{
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background: #1D2F3D;
+    border-radius: 20px;
+    
+}
+
+body {
+    background-image: url("./images/criaturas-pokemon-opacidad.jpg");
+    background-size: 100%;
+} 
+
+.busqueda{
+    padding-left: 60%;
+    
+    
+}
+
+button{
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #1d547e;
+    color: white;
+}
+
+button:hover{
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    color: #1d547e;
+}

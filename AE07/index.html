@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Pokemon</title>
+    <link rel="stylesheet" href="estilos.css">
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"> </script>
+    <script type="text/javascript">
+        function getGroupInfo() {
+            var strPokemonName = document.getElementById('strPokemonName').value;
+            
+            axios
+                .get("https://pokeapi.co/api/v2/pokemon/" + strPokemonName.toLowerCase()).then(response => {
+                    console.log(response.data);
+                    
+                    //Declaracion de Datos
+                    document.getElementById('strNombrePokemon').value = response.data.name;
+                    document.getElementById('strPosicionPokemon').value = response.data.id;
+                    document.getElementById('strHabilidadPokemon').value = response.data.moves[0].move.name;
+                    document.getElementById('strTipoPokemon').value = response.data.types[0].type.name;
+                    document.getElementById('strExperienciaPokemon').value = response.data.base_experience;
+                    document.getElementById('strAlturaPokemon').value = response.data.height;
+                    document.getElementById('strPesoPokemon').value = response.data.weight;
+                    
+                    //Declaracion de Imagenes
+                    document.getElementById('imagenFigure').src = response.data.sprites.other.home.front_default;
+                    document.getElementById('imagenFigure').style.display = "block";
+                    document.getElementById('imagenFront').src = response.data.sprites.front_default;
+                    document.getElementById('imagenFront').style.display = "block";
+                    document.getElementById('imagenBack').src = response.data.sprites.back_default;
+                    document.getElementById('imagenBack').style.display = "block";
+                    document.getElementById('imagenShiny').src = response.data.sprites.front_shiny;
+                    document.getElementById('imagenShiny').style.display = "block";
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert("No existe el Pokemon o no lo has escrito correctamente...");
+                    //document.getElementById('strNombrePokemon').value = "ERROR EN LA CONSULTA: " + error;
+                    //document.getElementById('imagenFront').style.display = "none";
+                })
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
+    <script type="text/javascript">
+        function guardarInfo() {
+            //en phpMyAdmin bd audiodb - tabla infogrupo, creo estos campos:
+            var nombre = document.getElementById('strNombrePokemon').value;
+            var posicion = document.getElementById('strPosicionPokemon').value;
+            var habilidad = document.getElementById('strHabilidadPokemon').value;
+            var tipo = document.getElementById('strTipoPokemon').value;
+            var experiencia = document.getElementById('strExperienciaPokemon').value;
+            var altura = document.getElementById('strAlturaPokemon').value;
+            var peso = document.getElementById('strPesoPokemon').value;
+            var figura = document.getElementById('imagenFigure').src;
+            var frontal = document.getElementById('imagenFront').src;
+            var trasera = document.getElementById('imagenBack').src;
+            var brillante = document.getElementById('imagenShiny').src;
+            $.ajax({
+                type: "POST", //metodoPOST para enviar datos al servidor
+                url: "pokemon.php", // ruta del fichero PHP del servidor
+                data: {
+                    // el primero debe de coincidir con el que pone en el php --> $artista = $_POST["artista"]; con este de dentro del POST--> "artista"
+                    nombre: nombre,
+                    posicion: posicion,
+                    habilidad: habilidad,
+                    tipo: tipo,
+                    experiencia: experiencia,
+                    altura: altura,
+                    peso: peso,
+                    figura: figura,
+                    frontal: frontal,
+                    trasera: trasera,
+                    brillante: brillante
+                }, // datos a enviar (p.ej. {valor:valor, nombre:nombre})
+                success: function (response) { //resultado del PHP del servidor
+                    alert(response);
+                },
+                error: function () {
+                    alert("Error ???");
+                }
+            });
+        }
+    </script>
+
+<div class="logo">
+    <img src="./images/logo_Pokemon.png" height="150px" alt="">
+</div>
+
+</head>
+
+<body>
+    
+    <div class="busqueda">
+        <p>Introduce nombre Pokemon o posicion Pokedex:</p>
+        <p>
+            <input type="text" value="" id="strPokemonName">
+            <button id="botonBusquedaPokemon" onclick="getGroupInfo()">Buscar</button>
+        </p>
+    </div>
+    
+    <div style="display:flex">
+        <div style="padding-left: 20%; padding-top: 1px">
+            <p style="padding-bottom: 5px;">Nombre: </p>
+            <p style="padding-bottom: 5px;">Posicion: </p>
+            <p style="padding-bottom: 5px;">Habilidades: </p>
+            <p style="padding-bottom: 2px;">Tipo: </p>
+            <p style="padding-bottom: 2px;">Experiencia: </p>
+            <p style="padding-bottom: 2px;">Altura: </p>
+            <p>Peso: </p>
+        </div>
+        <div style="padding-left: 10px;">
+           <p><input type="text" name="texto" id="strNombrePokemon"></p>
+            <p><input type="text" name="texto" id="strPosicionPokemon"></p>
+            <p><input type="text" name="texto" id="strHabilidadPokemon"></p>
+            <p><input type="text" name="texto" id="strTipoPokemon"></p>
+            <p><input type="text" name="texto" id="strExperienciaPokemon"></p>
+            <p><input type="text" name="texto" id="strAlturaPokemon"></p>
+            <p><input type="text" name="texto" id="strPesoPokemon"></p>
+        </div>
+        <div style="padding-left: 200px;">
+            <img id="imagenFigure" src="" height="300" style="display:none;" />
+        </div>
+
+    </div>
+    
+    <p style="padding-left: 25%;">Imagenes de Pokemon (Frontal / Trasera / Brillante):</p>
+
+    <div style="display:flex; height: 10px; width: 60%; padding-left: 30%;">
+        <img id="imagenFront" alt="Imagen Frontal" src="" height="200" style="display:none;" />
+        <img id="imagenBack" alt="Imagen Trasera" src="" height="200" style="display:none;" />
+        <img id="imagenShiny" alt="Imagen Brillante" height="200" style="display:none;" />   
+    </div>
+    <br>
+    <div>
+        <p style="padding-left: 80%;"><button id="botonGuardar" onclick="guardarInfo()">Guardar Informacion</button></p>
+    </div>
+    
+</body>
+</html>
