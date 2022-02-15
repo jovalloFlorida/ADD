@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/HibernateMappingDTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="es.florida.ejercicio1">
+    <class name="Precios" table="productos">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="item" type="string" column="item"/>
+        <property name="precio" type="string" column="precio"/>
+        <property name="precioOferta" type="string" column="precioOferta"/>
+        <property name="saldo" type="string" column="saldo"/>
+    </class>
+</hibernate-mapping>

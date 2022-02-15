@@ -97,10 +97,11 @@ public class Biblioteca {
 			MongoCollection<Document> coleccion = mongoDBConnection();
 			Document doc = new Document();
 			Scanner teclado = new Scanner(System.in);
-
+			
+			//Creacion del id. Contamos los registros de la coleccion y le sumamos +1
 			int idCount = (int) (coleccion.count() + 1);
-
 			doc.append("Id", String.valueOf(idCount));
+			
 			System.out.print("\nIntroduce el Titulo: ");
 			String titulo = teclado.nextLine();
 			doc.append("Titol", titulo);
